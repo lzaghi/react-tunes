@@ -32,7 +32,6 @@ class Album extends React.Component {
                 <div key={ index }>
                   <h3 data-testid="artist-name">{album.artistName}</h3>
                   <h4 data-testid="album-name">{album.collectionName}</h4>
-
                 </div>)
               : <MusicCard key={ index } album={ album } />
           ))
