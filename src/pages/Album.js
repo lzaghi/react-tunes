@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import Loading from './Loading';
 
 class Album extends React.Component {
   constructor() {
@@ -10,6 +12,8 @@ class Album extends React.Component {
 
     this.state = {
       musics: [],
+      loading: false,
+      listaFavs: [],
     };
   }
 
@@ -17,25 +21,42 @@ class Album extends React.Component {
     const { match } = this.props;
     const data = await getMusics(match.params.id);
     console.log(data);
-    this.setState({ musics: data });
+    this.setState(
+      { musics: data, loading: true },
+      async () => {
+        const lista = await getFavoriteSongs();
+        console.log(lista);
+        this.setState({ loading: false, listaFavs: lista });
+      },
+    );
   }
 
   render() {
-    const { musics } = this.state;
+    const { musics, loading, listaFavs } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
-        { musics.length > 0 && (
-          musics.map((music, index) => (
-            index === 0
-              ? (
-                <div key={ index }>
-                  <h3 data-testid="artist-name">{music.artistName}</h3>
-                  <h4 data-testid="album-name">{music.collectionName}</h4>
-                </div>)
-              : <MusicCard key={ index } music={ music } index={ index } />
-          ))
-        )}
+        { loading
+          ? <Loading />
+          : (
+            musics.length > 0 && (
+              musics.map((music, index) => (
+                index === 0
+                  ? (
+                    <div key={ index }>
+                      <h3 data-testid="artist-name">{music.artistName}</h3>
+                      <h4 data-testid="album-name">{music.collectionName}</h4>
+                    </div>)
+                  : (
+                    <MusicCard
+                      key={ index }
+                      music={ music }
+                      index={ index }
+                      listaFavs={ listaFavs }
+                    />)
+              ))
+            )
+          )}
       </div>
     );
   }

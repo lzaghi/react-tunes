@@ -21,8 +21,15 @@ class MusicCard extends React.Component {
       async () => {
         await addSong(music);
         this.setState({ loading: false });
+        this.checksList();
       },
     );
+  };
+
+  checksList = () => {
+    const { music, listaFavs } = this.props;
+    const bool = listaFavs.some((faixa) => faixa.trackId === music.trackId);
+    return bool;
   };
 
   render() {
@@ -39,15 +46,36 @@ class MusicCard extends React.Component {
           <code>audio</code>
           .
         </audio>
-        <label data-testid={ `checkbox-music-${trackId}` } htmlFor={ index.toString() }>
-          Favorita
-          <input
-            type="checkbox"
-            name="fav"
-            id={ index.toString() }
-            onChange={ this.addToFavorites }
-          />
-        </label>
+        { this.checksList()
+
+          ? (
+            <label
+              data-testid={ `checkbox-music-${trackId}` }
+              htmlFor={ index.toString() }
+            >
+              Favorita
+              <input
+                type="checkbox"
+                name="fav"
+                id={ index.toString() }
+                onChange={ this.addToFavorites }
+                checked
+              />
+            </label>
+          )
+          : (
+            <label
+              data-testid={ `checkbox-music-${trackId}` }
+              htmlFor={ index.toString() }
+            >
+              Favorita
+              <input
+                type="checkbox"
+                name="fav"
+                id={ index.toString() }
+                onChange={ this.addToFavorites }
+              />
+            </label>)}
         { loading && <Loading />}
       </div>
     );
@@ -55,6 +83,9 @@ class MusicCard extends React.Component {
 }
 
 MusicCard.propTypes = {
+  listaFavs: PropTypes.shape({
+    some: PropTypes.func,
+  }).isRequired,
   index: PropTypes.number.isRequired,
   music: PropTypes.shape({
     trackName: PropTypes.string,
