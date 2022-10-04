@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
 
 class MusicCard extends React.Component {
@@ -9,21 +9,54 @@ class MusicCard extends React.Component {
 
     this.state = {
       loading: false,
+      check: true,
     };
   }
 
-  addToFavorites = () => {
+  addToFavorites = ({ target }) => {
     const { music } = this.props;
+    const { check } = this.state;
+    console.log(target);
     this.setState(
-      {
-        loading: true,
-      },
-      async () => {
-        await addSong(music);
-        this.setState({ loading: false });
-        this.checksList();
-      },
+      (prev) => (
+        { check: !prev.check }
+      ),
+      (check
+        ? (
+          this.setState(
+            {
+              loading: true,
+            },
+            async () => {
+              await addSong(music);
+              this.setState({ loading: false });
+            },
+          )
+        )
+        : (
+          this.setState(
+            {
+              loading: true,
+            },
+            async () => {
+              await removeSong(music);
+              this.setState({ loading: false });
+            },
+          )
+        )
+      ),
     );
+    if (!target.checked) {
+      this.setState(
+        {
+          loading: true,
+        },
+        async () => {
+          await removeSong(music);
+          this.setState({ loading: false });
+        },
+      );
+    }
   };
 
   checksList = () => {
@@ -34,7 +67,7 @@ class MusicCard extends React.Component {
 
   render() {
     const { music: { trackName, trackId, previewUrl }, index } = this.props;
-    const { loading } = this.state;
+    const { loading, check } = this.state;
     return (
       <div>
         <p>{trackName}</p>
@@ -59,7 +92,7 @@ class MusicCard extends React.Component {
                 name="fav"
                 id={ index.toString() }
                 onChange={ this.addToFavorites }
-                defaultChecked
+                checked={ check }
               />
             </label>
           )
@@ -74,6 +107,7 @@ class MusicCard extends React.Component {
                 name="fav"
                 id={ index.toString() }
                 onChange={ this.addToFavorites }
+                checked={ !check }
               />
             </label>)}
         { loading && <Loading />}
