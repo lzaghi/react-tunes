@@ -59,7 +59,7 @@ class MusicCard extends React.Component {
                 name="fav"
                 id={ index.toString() }
                 onChange={ this.addToFavorites }
-                checked
+                defaultChecked
               />
             </label>
           )
