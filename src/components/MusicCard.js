@@ -7,7 +7,7 @@ class MusicCard extends React.Component {
     return (
       <div>
         <p>{album.trackName}</p>
-        <audio data-testid="audio-component" src="{previewUrl}" controls>
+        <audio data-testid="audio-component" src={ album.previewUrl } controls>
           <track kind="captions" />
           O seu navegador não suporta o elemento
           {' '}
@@ -23,6 +23,7 @@ class MusicCard extends React.Component {
 MusicCard.propTypes = {
   album: PropTypes.shape({
     trackName: PropTypes.string,
+    previewUrl: PropTypes.string,
   }).isRequired,
 };
 
