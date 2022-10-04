@@ -26,14 +26,14 @@ class Album extends React.Component {
       <div data-testid="page-album">
         <Header />
         { musics.length > 0 && (
-          musics.map((album, index) => (
+          musics.map((music, index) => (
             index === 0
               ? (
                 <div key={ index }>
-                  <h3 data-testid="artist-name">{album.artistName}</h3>
-                  <h4 data-testid="album-name">{album.collectionName}</h4>
+                  <h3 data-testid="artist-name">{music.artistName}</h3>
+                  <h4 data-testid="album-name">{music.collectionName}</h4>
                 </div>)
-              : <MusicCard key={ index } album={ album } />
+              : <MusicCard key={ index } music={ music } index={ index } />
           ))
         )}
       </div>
