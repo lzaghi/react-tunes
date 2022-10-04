@@ -8,35 +8,26 @@ class MusicCard extends React.Component {
     super();
 
     this.state = {
-      bool: false,
       loading: false,
     };
   }
 
   addToFavorites = () => {
     const { music } = this.props;
-    const { bool } = this.state;
     this.setState(
-      (prev) => ({
-        bool: !prev.bool,
-      }),
-      (!bool
-        ? (
-          this.setState({
-            loading: true,
-          }),
-          async () => {
-            await addSong(music);
-            this.setState({ loading: false });
-          }
-        )
-        : console.log('oi')),
+      {
+        loading: true,
+      },
+      async () => {
+        await addSong(music);
+        this.setState({ loading: false });
+      },
     );
   };
 
   render() {
     const { music: { trackName, trackId, previewUrl }, index } = this.props;
-    const { bool, loading } = this.state;
+    const { loading } = this.state;
     return (
       <div>
         <p>{trackName}</p>
@@ -54,7 +45,6 @@ class MusicCard extends React.Component {
             type="checkbox"
             name="fav"
             id={ index.toString() }
-            checked={ bool }
             onChange={ this.addToFavorites }
           />
         </label>
@@ -65,6 +55,7 @@ class MusicCard extends React.Component {
 }
 
 MusicCard.propTypes = {
+  index: PropTypes.number.isRequired,
   music: PropTypes.shape({
     trackName: PropTypes.string,
     trackId: PropTypes.number,
