@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
@@ -11,6 +12,7 @@ class Search extends React.Component {
       isButtonDisabled: true,
       input: '',
       loading: false,
+      consultado: '',
     };
   }
 
@@ -26,7 +28,7 @@ class Search extends React.Component {
   getAlbumList = () => {
     const { input } = this.state;
     this.setState(
-      { loading: true },
+      { loading: true, consultado: input },
       async () => {
         const data = await searchAlbumsAPI(input);
         console.log(data);
@@ -34,13 +36,14 @@ class Search extends React.Component {
           loading: false,
           valida: data.length > 0 ? 'tem' : 'vazio',
           data,
+          input: '',
         });
       },
     );
   };
 
   render() {
-    const { isButtonDisabled, input, loading, valida, data } = this.state;
+    const { isButtonDisabled, input, loading, valida, data, consultado } = this.state;
     return (
       <div data-testid="page-search">
         <Header />
@@ -66,9 +69,18 @@ class Search extends React.Component {
           )}
         { valida === 'tem' && (
           <div>
-            <p>{`Resultado de álbuns de: ${input}`}</p>
-            {data.map((album, index) => (
-              <p key={ index }>{ `Álbum ${index + 1}: ${album.collectionName} `}</p>
+            <p>{`Resultado de álbuns de: ${consultado}`}</p>
+            {data.map(({ collectionName, collectionId, artworkUrl100 }, index) => (
+              <div key={ index }>
+                <p>{ `Álbum ${index + 1}: ${collectionName} `}</p>
+                <img src={ artworkUrl100 } alt={ collectionName } />
+                <Link
+                  data-testid={ `link-to-album-${collectionId}` }
+                  to={ `/album/${collectionId}` }
+                >
+                  Ir para álbum
+                </Link>
+              </div>
             ))}
           </div>
         )}
