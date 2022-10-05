@@ -66,7 +66,8 @@ class MusicCard extends React.Component {
   };
 
   render() {
-    const { music: { trackName, trackId, previewUrl }, index } = this.props;
+    const { music, index, removeElement } = this.props;
+    const { trackName, trackId, previewUrl } = music;
     const { loading, check } = this.state;
     return (
       <div>
@@ -93,6 +94,7 @@ class MusicCard extends React.Component {
                 id={ index.toString() }
                 onChange={ this.addToFavorites }
                 checked={ check }
+                onClick={ removeElement }
               />
             </label>
           )
@@ -108,6 +110,7 @@ class MusicCard extends React.Component {
                 id={ index.toString() }
                 onChange={ this.addToFavorites }
                 checked={ !check }
+                onClick={ removeElement }
               />
             </label>)}
         { loading && <Loading />}
@@ -117,15 +120,16 @@ class MusicCard extends React.Component {
 }
 
 MusicCard.propTypes = {
-  listaFavs: PropTypes.shape({
+  listaFavs: PropTypes.arrayOf(PropTypes.shape({
     some: PropTypes.func,
-  }).isRequired,
+  })).isRequired,
   index: PropTypes.number.isRequired,
   music: PropTypes.shape({
     trackName: PropTypes.string,
     trackId: PropTypes.number,
     previewUrl: PropTypes.string,
   }).isRequired,
+  removeElement: PropTypes.func.isRequired,
 };
 
 export default MusicCard;
