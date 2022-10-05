@@ -25,8 +25,19 @@ class Favorites extends React.Component {
     );
   }
 
-  removeElement = ({ target }) => {
+  removeElement = (target) => {
     target.parentNode.parentNode.remove();
+    // const timeout = 2000;
+    // this.setState(
+    //   this.setState(
+    //     { loading: true },
+    //   ),
+    //   () => {
+    //     setTimeout(() => {
+    //       this.setState({ loading: false, updated: false });
+    //     }, timeout);
+    //   },
+    // );
   };
 
   render() {

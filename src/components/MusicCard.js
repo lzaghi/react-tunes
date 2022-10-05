@@ -13,6 +13,25 @@ class MusicCard extends React.Component {
     };
   }
 
+  getProp = (target) => {
+    const { removeElement } = this.props;
+    removeElement(target);
+  };
+
+  handleRemove = (target) => {
+    const { music, removeElement } = this.props;
+    this.setState(
+      {
+        loading: true,
+      },
+      async () => {
+        await removeSong(music);
+        if (typeof removeElement !== 'undefined') this.getProp(target);
+        this.setState({ loading: false });
+      },
+    );
+  };
+
   addToFavorites = ({ target }) => {
     const { music } = this.props;
     const { check } = this.state;
@@ -22,7 +41,7 @@ class MusicCard extends React.Component {
         { check: !prev.check }
       ),
       (check
-        ? (
+        && (
           this.setState(
             {
               loading: true,
@@ -33,30 +52,21 @@ class MusicCard extends React.Component {
             },
           )
         )
-        : (
-          this.setState(
-            {
-              loading: true,
-            },
-            async () => {
-              await removeSong(music);
-              this.setState({ loading: false });
-            },
-          )
-        )
+        // : (
+        //   this.setState(
+        //     {
+        //       loading: true,
+        //     },
+        //     async () => {
+        //       await removeSong(music);
+        //       removeElement(target);
+        //       this.setState({ loading: false });
+        //     },
+        //   )
+        // )
       ),
     );
-    if (!target.checked) {
-      this.setState(
-        {
-          loading: true,
-        },
-        async () => {
-          await removeSong(music);
-          this.setState({ loading: false });
-        },
-      );
-    }
+    if (!target.checked) this.handleRemove(target);
   };
 
   checksList = () => {
@@ -66,7 +76,7 @@ class MusicCard extends React.Component {
   };
 
   render() {
-    const { music, index, removeElement } = this.props;
+    const { music, index } = this.props;
     const { trackName, trackId, previewUrl } = music;
     const { loading, check } = this.state;
     return (
@@ -94,7 +104,6 @@ class MusicCard extends React.Component {
                 id={ index.toString() }
                 onChange={ this.addToFavorites }
                 checked={ check }
-                onClick={ removeElement }
               />
             </label>
           )
@@ -110,7 +119,7 @@ class MusicCard extends React.Component {
                 id={ index.toString() }
                 onChange={ this.addToFavorites }
                 checked={ !check }
-                onClick={ removeElement }
+                // onClick={ removeElement }
               />
             </label>)}
         { loading && <Loading />}
