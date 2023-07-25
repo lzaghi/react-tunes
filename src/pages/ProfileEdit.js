@@ -38,12 +38,15 @@ class ProfileEdit extends React.Component {
     console.log(target.value);
   };
 
+  validaEmail = (email) => {
+    const regex = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  };
+
   validaBotao = () => {
     const { name, email, image, description } = this.state;
     const filled = name.length > 0
-      && email.length > 0
-      && email.includes('@')
-      && email.includes('.com')
+      && this.validaEmail(email)
       && image.length > 0
       && description.length > 0;
     return !filled;
@@ -76,34 +79,47 @@ class ProfileEdit extends React.Component {
           ? <Loading />
           : (
             <form>
-              <input
-                data-testid="edit-input-name"
-                type="text"
-                name="name"
-                defaultValue={ name }
-                onChange={ this.onInputChange }
-              />
-              <input
-                data-testid="edit-input-email"
-                type="text"
-                name="email"
-                defaultValue={ email }
-                onChange={ this.onInputChange }
-              />
-              <input
-                data-testid="edit-input-description"
-                type="text"
-                name="description"
-                defaultValue={ description }
-                onChange={ this.onInputChange }
-              />
-              <input
-                data-testid="edit-input-image"
-                type="text"
-                name="image"
-                defaultValue={ image }
-                onChange={ this.onInputChange }
-              />
+              <label htmlFor="name">
+                Nome
+                <input
+                  data-testid="edit-input-name"
+                  type="text"
+                  name="name"
+                  id="name"
+                  defaultValue={ name }
+                  onChange={ this.onInputChange }
+                />
+              </label>
+              <label htmlFor="email">
+                Email
+                <input
+                  data-testid="edit-input-email"
+                  type="text"
+                  name="email"
+                  defaultValue={ email }
+                  onChange={ this.onInputChange }
+                />
+              </label>
+              <label htmlFor="description">
+                Description
+                <input
+                  data-testid="edit-input-description"
+                  type="text"
+                  name="description"
+                  defaultValue={ description }
+                  onChange={ this.onInputChange }
+                />
+              </label>
+              <label htmlFor="image">
+                Image
+                <input
+                  data-testid="edit-input-image"
+                  type="text"
+                  name="image"
+                  defaultValue={ image }
+                  onChange={ this.onInputChange }
+                />
+              </label>
               <button
                 data-testid="edit-button-save"
                 type="button"

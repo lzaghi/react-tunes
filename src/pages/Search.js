@@ -31,10 +31,10 @@ class Search extends React.Component {
       { loading: true, consultado: input },
       async () => {
         const data = await searchAlbumsAPI(input);
-        console.log(data);
+
         this.setState({
           loading: false,
-          valida: data.length > 0 ? 'tem' : 'vazio',
+          status: data.length > 0 ? 'found' : 'not found',
           data,
           input: '',
         });
@@ -43,7 +43,7 @@ class Search extends React.Component {
   };
 
   render() {
-    const { isButtonDisabled, input, loading, valida, data, consultado } = this.state;
+    const { isButtonDisabled, input, loading, status, data, consultado } = this.state;
     return (
       <div data-testid="page-search">
         <Header />
@@ -67,7 +67,7 @@ class Search extends React.Component {
               </button>
             </form>
           )}
-        { valida === 'tem' && (
+        { status === 'found' && (
           <div>
             <p>{`Resultado de álbuns de: ${consultado}`}</p>
             {data.map(({ collectionName, collectionId, artworkUrl100 }, index) => (
@@ -84,7 +84,7 @@ class Search extends React.Component {
             ))}
           </div>
         )}
-        { valida === 'vazio' && (
+        { status === 'not found' && (
           <p>Nenhum álbum foi encontrado</p>
         )}
 
