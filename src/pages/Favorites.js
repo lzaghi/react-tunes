@@ -19,25 +19,21 @@ class Favorites extends React.Component {
       { loading: true },
       async () => {
         const lista = await getFavoriteSongs();
-        console.log(lista);
         this.setState({ loading: false, listaFavs: lista });
       },
     );
   }
 
-  removeElement = (target) => {
-    target.parentNode.parentNode.remove();
-    // const timeout = 2000;
-    // this.setState(
-    //   this.setState(
-    //     { loading: true },
-    //   ),
-    //   () => {
-    //     setTimeout(() => {
-    //       this.setState({ loading: false, updated: false });
-    //     }, timeout);
-    //   },
-    // );
+  componentDidUpdate() {
+    const { listaFavs } = this.state;
+    const newList = JSON.parse(localStorage.getItem('favorite_songs'));
+    if (JSON.stringify(newList) !== JSON.stringify(listaFavs)) {
+      this.setState({ listaFavs: newList });
+    }
+  }
+
+  handleListUpdating = (newList) => {
+    this.setState({ listaFavs: newList });
   };
 
   render() {
@@ -54,7 +50,7 @@ class Favorites extends React.Component {
                 music={ music }
                 index={ index }
                 listaFavs={ listaFavs }
-                removeElement={ this.removeElement }
+                handleListUpdating={ this.handleListUpdating }
               />
             ))
           )}

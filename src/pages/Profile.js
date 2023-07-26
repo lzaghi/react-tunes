@@ -20,7 +20,6 @@ class Profile extends React.Component {
       async () => {
         const data = await getUser();
         this.setState({ loading: false, user: data });
-        console.log(data);
       },
     );
   }

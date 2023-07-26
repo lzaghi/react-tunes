@@ -24,18 +24,15 @@ class ProfileEdit extends React.Component {
         const data = await getUser();
         const { name, email, image, description } = data;
         this.setState({ loading: false, name, email, image, description });
-        console.log(data);
       },
     );
   }
 
   onInputChange = ({ target }) => {
     const { name, value } = target;
-    console.log(target.name);
     this.setState({
       [name]: value,
     });
-    console.log(target.value);
   };
 
   validaEmail = (email) => {

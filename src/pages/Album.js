@@ -20,16 +20,18 @@ class Album extends React.Component {
   async componentDidMount() {
     const { match } = this.props;
     const data = await getMusics(match.params.id);
-    console.log(data);
     this.setState(
       { musics: data, loading: true },
       async () => {
         const lista = await getFavoriteSongs();
-        console.log(lista);
         this.setState({ loading: false, listaFavs: lista });
       },
     );
   }
+
+  handleListUpdating = (newList) => {
+    this.setState({ listaFavs: newList });
+  };
 
   render() {
     const { musics, loading, listaFavs } = this.state;
@@ -53,6 +55,7 @@ class Album extends React.Component {
                       music={ music }
                       index={ index }
                       listaFavs={ listaFavs }
+                      handleListUpdating={ this.handleListUpdating }
                     />)
               ))
             )
