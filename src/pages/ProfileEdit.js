@@ -67,6 +67,13 @@ class ProfileEdit extends React.Component {
     });
   };
 
+  handleEnterKey = (event) => {
+    if (event.key === 'Enter' && !this.validaBotao()) {
+      event.preventDefault();
+      this.onSave();
+    }
+  };
+
   render() {
     const { loading, name, email, image, description } = this.state;
     return (
@@ -85,6 +92,7 @@ class ProfileEdit extends React.Component {
                   id="name"
                   defaultValue={ name }
                   onChange={ this.onInputChange }
+                  onKeyDown={ this.handleEnterKey }
                 />
               </label>
               <label htmlFor="email">
@@ -95,6 +103,7 @@ class ProfileEdit extends React.Component {
                   name="email"
                   defaultValue={ email }
                   onChange={ this.onInputChange }
+                  onKeyDown={ this.handleEnterKey }
                 />
               </label>
               <label htmlFor="description">
@@ -105,6 +114,7 @@ class ProfileEdit extends React.Component {
                   name="description"
                   defaultValue={ description }
                   onChange={ this.onInputChange }
+                  onKeyDown={ this.handleEnterKey }
                 />
               </label>
               <label htmlFor="image">
@@ -115,6 +125,7 @@ class ProfileEdit extends React.Component {
                   name="image"
                   defaultValue={ image }
                   onChange={ this.onInputChange }
+                  onKeyDown={ this.handleEnterKey }
                 />
               </label>
               <button

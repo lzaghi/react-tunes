@@ -25,6 +25,14 @@ class Search extends React.Component {
     }
   };
 
+  handleEnterKey = (event) => {
+    const { isButtonDisabled } = this.state;
+    if (event.key === 'Enter' && !isButtonDisabled) {
+      event.preventDefault();
+      this.getAlbumList();
+    }
+  };
+
   getAlbumList = () => {
     const { input } = this.state;
     this.setState(
@@ -55,6 +63,7 @@ class Search extends React.Component {
                 data-testid="search-artist-input"
                 type="text"
                 onChange={ this.handleButton }
+                onKeyDown={ this.handleEnterKey }
                 value={ input }
               />
               <button

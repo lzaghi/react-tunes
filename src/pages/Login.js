@@ -23,7 +23,7 @@ class Login extends React.Component {
     }
   };
 
-  stateLoading = () => {
+  login = () => {
     const { nome } = this.state;
     const { history } = this.props;
 
@@ -37,6 +37,14 @@ class Login extends React.Component {
     );
   };
 
+  handleEnterKey = (event) => {
+    const { isButtonDisabled } = this.state;
+    if (event.key === 'Enter' && !isButtonDisabled) {
+      event.preventDefault();
+      this.login();
+    }
+  };
+
   render() {
     const { isButtonDisabled, loading } = this.state;
     return (
@@ -46,12 +54,13 @@ class Login extends React.Component {
             data-testid="login-name-input"
             type="text"
             onChange={ this.handleButton }
+            onKeyDown={ this.handleEnterKey }
           />
           <button
             data-testid="login-submit-button"
             type="button"
             disabled={ isButtonDisabled }
-            onClick={ this.stateLoading }
+            onClick={ this.login }
           >
             Entrar
           </button>
