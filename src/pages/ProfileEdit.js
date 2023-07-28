@@ -12,7 +12,7 @@ class ProfileEdit extends React.Component {
       loading: false,
       name: '',
       email: '',
-      image: '',
+      image: null,
       description: '',
     };
   }
@@ -35,6 +35,11 @@ class ProfileEdit extends React.Component {
     });
   };
 
+  onImageChange = ({ target }) => {
+    const file = target.files[0];
+    this.setState({ image: URL.createObjectURL(file) });
+  };
+
   validaEmail = (email) => {
     const regex = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
@@ -44,7 +49,7 @@ class ProfileEdit extends React.Component {
     const { name, email, image, description } = this.state;
     const filled = name.length > 0
       && this.validaEmail(email)
-      && image.length > 0
+      && image
       && description.length > 0;
     return !filled;
   };
@@ -54,6 +59,7 @@ class ProfileEdit extends React.Component {
     const { history } = this.props;
 
     const userAtualizado = { name, email, image, description };
+
     this.setState({
       loading: true,
     }, async () => {
@@ -75,7 +81,7 @@ class ProfileEdit extends React.Component {
   };
 
   render() {
-    const { loading, name, email, image, description } = this.state;
+    const { loading, name, email, description } = this.state;
     return (
       <div data-testid="page-profile-edit">
         <Header />
@@ -121,11 +127,9 @@ class ProfileEdit extends React.Component {
                 Image
                 <input
                   data-testid="edit-input-image"
-                  type="text"
+                  type="file"
                   name="image"
-                  defaultValue={ image }
-                  onChange={ this.onInputChange }
-                  onKeyDown={ this.handleEnterKey }
+                  onChange={ this.onImageChange }
                 />
               </label>
               <button
