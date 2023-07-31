@@ -66,6 +66,7 @@ class Header extends React.Component {
                 data-testid="link-to-search"
                 to="/search"
                 className={ styles.link }
+                onClick={ () => this.toggleMenu(false) }
               >
                 Search
               </Link>
@@ -78,6 +79,7 @@ class Header extends React.Component {
                 data-testid="link-to-favorites"
                 to="/favorites"
                 className={ styles.link }
+                onClick={ () => this.toggleMenu(false) }
               >
                 Favorites
               </Link>
@@ -90,6 +92,7 @@ class Header extends React.Component {
                 data-testid="link-to-profile"
                 to="/profile"
                 className={ styles.link }
+                onClick={ () => this.toggleMenu(false) }
               >
                 Profile
 
