@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
+import styles from './styles/MusicCard.module.css';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -17,8 +18,9 @@ class MusicCard extends React.Component {
     this.handleCheckboxes();
   }
 
-  handleCheckboxes = () => {
-    const { listaFavs, music } = this.props;
+  handleCheckboxes = async () => {
+    const { music } = this.props;
+    const { listaFavs } = this.props;
     if (listaFavs.some((track) => track.trackId === music.trackId)) {
       this.setState({ check: true });
     }
@@ -26,42 +28,55 @@ class MusicCard extends React.Component {
 
   handleFavorites = async (music) => {
     const { listaFavs, handleListUpdating } = this.props;
-    if (listaFavs.some((track) => track.trackId === music.trackId)) {
-      this.setState(
-        { loading: true },
-        async () => {
-          await removeSong(music);
-          this.setState({ loading: false, check: false });
-          handleListUpdating(await getFavoriteSongs());
-          this.handleCheckboxes();
-        },
-      );
+    const isFavorite = listaFavs.some((track) => track.trackId === music.trackId);
+    this.setState({ loading: true });
+
+    if (isFavorite) {
+      await removeSong(music);
     } else {
-      this.setState(
-        { loading: true },
-        async () => {
-          await addSong(music);
-          this.setState({ loading: false, check: true });
-          handleListUpdating(await getFavoriteSongs());
-          this.handleCheckboxes();
-        },
-      );
+      await addSong(music);
+    }
+
+    this.setState({ loading: false, check: !isFavorite });
+    handleListUpdating(await getFavoriteSongs());
+
+    const { props: { location: { pathname } } } = this.props;
+    if (pathname === '/favorites') {
+      this.handleCheckboxes();
     }
   };
 
   render() {
-    const { music, index } = this.props;
-    const { trackName, trackId, previewUrl } = music;
+    const { music } = this.props;
+    const { trackName, previewUrl } = music;
     const { loading, check } = this.state;
     return (
-      <div>
-        <p>{trackName}</p>
-        <audio data-testid="audio-component" src={ previewUrl } controls>
+      <div className={ styles.card }>
+        <div className={ styles.cardTop }>
+          <p className={ styles.song }>{trackName}</p>
+          <button
+            type="button"
+            onClick={ () => this.handleFavorites(music) }
+            className={ styles.favButton }
+          >
+            <span
+              className={ `material-icons-outlined ${styles.favIcon}` }
+            >
+              { check ? 'favorite' : 'favorite_outlined'}
+            </span>
+          </button>
+        </div>
+        <audio
+          className={ styles.audio }
+          data-testid="audio-component"
+          src={ previewUrl }
+          controls
+        >
           <track kind="captions" />
           O seu navegador não suporta o elemento
           <code>audio</code>
         </audio>
-        <label
+        {/* <label
           data-testid={ `checkbox-music-${trackId}` }
           htmlFor={ index.toString() }
         >
@@ -73,7 +88,7 @@ class MusicCard extends React.Component {
             onChange={ () => this.handleFavorites(music) }
             checked={ check }
           />
-        </label>
+        </label> */}
         { loading && <Loading />}
       </div>
     );
@@ -81,8 +96,7 @@ class MusicCard extends React.Component {
 }
 
 MusicCard.propTypes = {
-  handleListUpdating: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
+  handleListUpdating: PropTypes.func.isRequired, // index: PropTypes.number.isRequired,
   listaFavs: PropTypes.arrayOf(PropTypes.shape({
     some: PropTypes.func,
   })).isRequired,
@@ -90,6 +104,11 @@ MusicCard.propTypes = {
     previewUrl: PropTypes.string,
     trackId: PropTypes.number,
     trackName: PropTypes.string,
+  }).isRequired,
+  props: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
   }).isRequired,
 };
 
