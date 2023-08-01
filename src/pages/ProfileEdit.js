@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { getUser, updateUser } from '../services/userAPI';
 import Loading from './Loading';
+import styles from './styles/ProfileEdit.module.css';
 
 class ProfileEdit extends React.Component {
   constructor() {
@@ -86,12 +87,14 @@ class ProfileEdit extends React.Component {
       <div data-testid="page-profile-edit">
         <Header />
         { loading
-          ? <Loading />
+          ? <div className={ styles.loading }><Loading /></div>
           : (
-            <form>
-              <label htmlFor="name">
+            <form className={ styles.editContainer }>
+              <p className={ styles.editP }>Edite seu perfil</p>
+              <label className={ styles.label } htmlFor="name">
                 Nome
                 <input
+                  className={ styles.editInput }
                   data-testid="edit-input-name"
                   type="text"
                   name="name"
@@ -101,9 +104,10 @@ class ProfileEdit extends React.Component {
                   onKeyDown={ this.handleEnterKey }
                 />
               </label>
-              <label htmlFor="email">
+              <label className={ styles.label } htmlFor="email">
                 Email
                 <input
+                  className={ styles.editInput }
                   data-testid="edit-input-email"
                   type="text"
                   name="email"
@@ -112,9 +116,10 @@ class ProfileEdit extends React.Component {
                   onKeyDown={ this.handleEnterKey }
                 />
               </label>
-              <label htmlFor="description">
-                Description
-                <input
+              <label className={ styles.label } htmlFor="description">
+                Descrição
+                <textarea
+                  className={ styles.editTextarea }
                   data-testid="edit-input-description"
                   type="text"
                   name="description"
@@ -123,9 +128,10 @@ class ProfileEdit extends React.Component {
                   onKeyDown={ this.handleEnterKey }
                 />
               </label>
-              <label htmlFor="image">
-                Image
+              <label className={ styles.label } htmlFor="image">
+                Imagem
                 <input
+                  className={ styles.imageInput }
                   data-testid="edit-input-image"
                   type="file"
                   name="image"
@@ -133,6 +139,7 @@ class ProfileEdit extends React.Component {
                 />
               </label>
               <button
+                className={ styles.editButton }
                 data-testid="edit-button-save"
                 type="button"
                 disabled={ this.validaBotao() }

@@ -1,0 +1,80 @@
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  position: relative;
+  top: 150px;
+  width: 300px;
+}
+
+.loading {
+  left: 50%;
+  position: absolute;
+  top: 170px;
+  transform: translate(-50%, -50%);
+}
+
+.editP {
+  border-bottom: 2px solid gray;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.editInput {
+  border: 1px solid black;
+  border-radius: 100px;
+  display: block;
+  height: 35px;
+  margin: 5px 0 20px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.editTextarea {
+  border: 1px solid black;
+  border-radius: 10px;
+  display: block;
+  height: 35px;
+  margin: 5px 0 20px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.imageInput {
+  margin-top: 5px;
+}
+
+.editButton {
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 30px;
+  margin: 30px auto 40px;
+  padding-inline: 10px;
+  text-align: center;
+}
+
+.editButton:disabled {
+  background: #819ef5;
+  border: 1px solid #819ef5;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.editButton:enabled {
+  background: #003be5;
+  border: 1px solid #003be5;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.3s;
+}

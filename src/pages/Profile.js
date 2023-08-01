@@ -54,7 +54,7 @@ class Profile extends React.Component {
                 {user.email || '-'}
               </p>
               <p className={ styles.descContainer }>
-                <span className={ styles.desc }>Description: </span>
+                <span className={ styles.desc }>Descrição: </span>
                 {user.description || '-'}
               </p>
               <Link className={ styles.link } to="/profile/edit">editar perfil</Link>
