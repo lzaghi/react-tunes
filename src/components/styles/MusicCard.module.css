@@ -1,0 +1,39 @@
+.card {
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  padding: 10px 10px 15px;
+}
+
+.audio {
+  height: 40px;
+  width: 250px;
+}
+
+.favButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  max-width: fit-content;
+  padding: 0;
+}
+
+.favIcon {
+  font-size: 30px;
+  max-width: 30px;
+}
+
+.cardTop {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 250px;
+}
+
+.song {
+  font-size: 16px;
+}

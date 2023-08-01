@@ -3,11 +3,12 @@ import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
+import styles from './styles/Favorites.module.css';
 
 class Favorites extends React.Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
+    console.log('aa', props);
     this.state = {
       loading: false,
       listaFavs: [],
@@ -41,19 +42,27 @@ class Favorites extends React.Component {
     return (
       <div data-testid="page-favorites">
         <Header />
+        <div className={ styles.favContainer }>
+          <p className={ styles.favP }>Músicas favoritas</p>
+          {!loading && (
+            !listaFavs.length ? (
+              <p className={ styles.noFav }>
+                Você ainda não tem nenhuma música favorita...
+              </p>
+            ) : (
+              listaFavs.map((music, index) => (
+                <MusicCard
+                  key={ index }
+                  music={ music }
+                  index={ index }
+                  listaFavs={ listaFavs }
+                  handleListUpdating={ this.handleListUpdating }
+                  props={ this.props }
+                />
+              ))))}
+        </div>
         { loading
-          ? <Loading />
-          : (
-            listaFavs.map((music, index) => (
-              <MusicCard
-                key={ index }
-                music={ music }
-                index={ index }
-                listaFavs={ listaFavs }
-                handleListUpdating={ this.handleListUpdating }
-              />
-            ))
-          )}
+          && <div className={ styles.loading }><Loading /></div>}
       </div>
     );
   }

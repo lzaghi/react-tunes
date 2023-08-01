@@ -5,14 +5,15 @@ import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
+import styles from './styles/Album.module.css';
 
 class Album extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       musics: [],
-      loading: false,
+      loading: true,
       listaFavs: [],
     };
   }
@@ -21,7 +22,7 @@ class Album extends React.Component {
     const { match } = this.props;
     const data = await getMusics(match.params.id);
     this.setState(
-      { musics: data, loading: true },
+      { musics: data },
       async () => {
         const lista = await getFavoriteSongs();
         this.setState({ loading: false, listaFavs: lista });
@@ -39,26 +40,35 @@ class Album extends React.Component {
       <div data-testid="page-album">
         <Header />
         { loading
-          ? <Loading />
+          ? <div className={ styles.loading }><Loading /></div>
           : (
-            musics.length > 0 && (
-              musics.map((music, index) => (
-                index === 0
-                  ? (
-                    <div key={ index }>
-                      <h3 data-testid="artist-name">{music.artistName}</h3>
-                      <h4 data-testid="album-name">{music.collectionName}</h4>
-                    </div>)
-                  : (
-                    <MusicCard
-                      key={ index }
-                      music={ music }
-                      index={ index }
-                      listaFavs={ listaFavs }
-                      handleListUpdating={ this.handleListUpdating }
-                    />)
-              ))
-            )
+            <div className={ styles.albumContainer }>
+              {
+                musics.length > 0 && (
+                  musics.map((music, index) => (
+                    index === 0
+                      ? (
+                        <div className={ styles.album } key={ index }>
+                          <img src={ music.artworkUrl100 } alt={ music.collectionName } />
+                          <div className={ styles.albumInfo }>
+                            <h4 data-testid="album-name">{music.collectionName}</h4>
+                            <h3 data-testid="artist-name">{music.artistName}</h3>
+                          </div>
+                        </div>)
+                      : (
+                        <MusicCard
+                          key={ index }
+                          music={ music }
+                          index={ index }
+                          listaFavs={ listaFavs }
+                          handleListUpdating={ this.handleListUpdating }
+                          props={ this.props }
+                        />)
+                  ))
+                )
+              }
+            </div>
+
           )}
       </div>
     );
