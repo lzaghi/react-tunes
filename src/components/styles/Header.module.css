@@ -59,6 +59,15 @@
   display: initial;
 }
 
+.menu-expanded .linkBox {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.menu-expanded .linkBox:hover {
+  box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+}
+
 .menu-expanded .links .link {
   color: white;
   font-size: 20px;

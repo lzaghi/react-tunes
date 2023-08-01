@@ -8,7 +8,6 @@ import styles from './styles/Favorites.module.css';
 class Favorites extends React.Component {
   constructor(props) {
     super(props);
-    console.log('aa', props);
     this.state = {
       loading: false,
       listaFavs: [],
