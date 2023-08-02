@@ -10,8 +10,12 @@
   /* transition: height 0.5s ease; */
 }
 
-.header img {
+.whiteLogo {
   width: 120px;
+}
+
+.normalLogo {
+  display: none;
 }
 
 .top-bar {
@@ -103,4 +107,80 @@
 .menu-expanded .user h2 {
   color: white;
   font-size: 30px;
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .open, .close, .menu-expanded .close {
+    display: none;
+  }
+
+  .linkBox, .menu-expanded .linkBox {
+    border-radius: 10px;
+    display: flex;
+    height: initial;
+    margin-bottom: 60px;
+    opacity: 1;
+    padding: 10px;
+  }
+
+  .header {
+    background-color: white;
+    background-image: none;
+    border-radius: 0;
+    height: 100vh;
+    max-width: 350px;
+    width: 28%;
+  }
+
+  .top-bar {
+    margin-top: 30px;
+    width: fit-content;
+  }
+
+  .whiteLogo {
+    display: none;
+  }
+
+  .normalLogo {
+    display: initial;
+    width: 200px;
+  }
+
+  .burger, .menu-expanded .burger {
+    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 300px);
+    justify-content: space-between;
+    margin: 100px auto 0;
+    padding: 0;
+    width: 200px;
+  }
+
+  .iconSm {
+    color: black;
+  }
+
+  .links .link, .menu-expanded .links .link {
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 10px;
+    text-decoration: none;
+  }
+
+  .linkBox:hover {
+    box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+  }
+
+  .user, .menu-expanded .user {
+    align-self: center;
+    display: flex;
+  }
+
+  .user h2, .menu-expanded .user h2 {
+    color: black;
+    font-size: 25px;
+  }
 }

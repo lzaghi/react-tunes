@@ -14,6 +14,7 @@
   box-shadow: 0 0 26px 0 rgba(68, 73, 85, 0.2);
   margin-inline: auto;
   padding: 40px;
+  transition: ease 0.3s;
   width: 300px;
 }
 
@@ -74,4 +75,12 @@
   position: absolute;
   right: 0;
   top: 0;
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .loginCard {
+    transition: ease 0.3s;
+    width: 450px;
+  }
 }

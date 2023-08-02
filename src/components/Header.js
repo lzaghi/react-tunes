@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import Loading from '../pages/Loading';
 import { getUser } from '../services/userAPI';
 import styles from './styles/Header.module.css';
-import logo from '../utils/logo-white.png';
+import whiteLogo from '../utils/logo-white.png';
+import logo from '../utils/logo.png';
 
 class Header extends React.Component {
   constructor() {
@@ -35,7 +36,16 @@ class Header extends React.Component {
     return (
       <nav className={ styles.header }>
         <header className={ styles['top-bar'] }>
-          <img src={ logo } alt="trybe tunes logo" />
+          <img
+            className={ styles.whiteLogo }
+            src={ whiteLogo }
+            alt="trybe tunes logo"
+          />
+          <img
+            className={ styles.normalLogo }
+            src={ logo }
+            alt="trybe tunes logo"
+          />
           <button
             type="button"
             className={ styles.open }
@@ -68,7 +78,7 @@ class Header extends React.Component {
                 className={ styles.link }
                 onClick={ () => this.toggleMenu(false) }
               >
-                Search
+                Pesquisa
               </Link>
             </div>
             <div className={ styles.linkBox }>
@@ -81,7 +91,7 @@ class Header extends React.Component {
                 className={ styles.link }
                 onClick={ () => this.toggleMenu(false) }
               >
-                Favorites
+                Favoritas
               </Link>
             </div>
             <div className={ styles.linkBox }>
@@ -94,7 +104,7 @@ class Header extends React.Component {
                 className={ styles.link }
                 onClick={ () => this.toggleMenu(false) }
               >
-                Profile
+                Perfil
 
               </Link>
             </div>

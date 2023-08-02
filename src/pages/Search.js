@@ -55,7 +55,7 @@ class Search extends React.Component {
   render() {
     const { isButtonDisabled, input, loading, status, data, consultado } = this.state;
     return (
-      <div data-testid="page-search">
+      <div className={ styles.searchContainer } data-testid="page-search">
         <Header />
         <form className={ styles.searchForm }>
           <input

@@ -145,3 +145,17 @@
   top: 350px;
   transform: translate(-50%, -50%);
 }
+
+@media screen and ( min-width : 1024px ) {
+
+  .searchContainer {
+    background-color: #eff3f9;
+    /* border: 1px solid red; */
+    height: 100vh;
+  }
+
+  .searchForm {
+    border: 1px solid blue;
+    position: initial;
+  }
+}
