@@ -55,7 +55,7 @@ class Search extends React.Component {
   render() {
     const { isButtonDisabled, input, loading, status, data, consultado } = this.state;
     return (
-      <div className={ styles.searchContainer } data-testid="page-search">
+      <div className={ styles.wrapper } data-testid="page-search">
         <Header />
         <div className={ styles.freeSpace }>
           <div className={ styles.bgTop } />

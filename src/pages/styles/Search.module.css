@@ -150,7 +150,7 @@
 
 @media screen and ( min-width : 1024px ) {
 
-  .searchContainer {
+  .wrapper {
     background-color: #eff3f9;
     height: 100vh;
   }

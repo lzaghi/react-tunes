@@ -37,39 +37,45 @@ class Album extends React.Component {
   render() {
     const { musics, loading, listaFavs } = this.state;
     return (
-      <div data-testid="page-album">
+      <div className={ styles.wrapper } data-testid="page-album">
         <Header />
-        { loading
-          ? <div className={ styles.loading }><Loading /></div>
-          : (
-            <div className={ styles.albumContainer }>
-              {
-                musics.length > 0 && (
-                  musics.map((music, index) => (
-                    index === 0
-                      ? (
-                        <div className={ styles.album } key={ index }>
-                          <img src={ music.artworkUrl100 } alt={ music.collectionName } />
-                          <div className={ styles.albumInfo }>
-                            <h4 data-testid="album-name">{music.collectionName}</h4>
-                            <h3 data-testid="artist-name">{music.artistName}</h3>
-                          </div>
-                        </div>)
-                      : (
-                        <MusicCard
+        <div className={ styles.freeSpace }>
+          <div className={ styles.bgTop } />
+          { loading
+            ? <div className={ styles.loading }><Loading /></div>
+            : (
+              <div>
+                { musics.length > 0 && (
+                  <div className={ styles.album }>
+                    <img
+                      src={ musics[0].artworkUrl100 }
+                      alt={ musics[0].collectionName }
+                    />
+                    <div className={ styles.albumInfo }>
+                      <h4 data-testid="album-name">{musics[0].collectionName}</h4>
+                      <h3 data-testid="artist-name">{musics[0].artistName}</h3>
+                    </div>
+                  </div>)}
+                <div className={ styles.albumContainer }>
+                  {
+                    musics.length > 0 && (
+                      musics.map((music, index) => (
+                        index > 0
+                        && <MusicCard
                           key={ index }
                           music={ music }
                           index={ index }
                           listaFavs={ listaFavs }
                           handleListUpdating={ this.handleListUpdating }
                           props={ this.props }
-                        />)
-                  ))
-                )
-              }
-            </div>
+                        />)))
 
-          )}
+                  }
+                </div>
+              </div>
+
+            )}
+        </div>
       </div>
     );
   }
