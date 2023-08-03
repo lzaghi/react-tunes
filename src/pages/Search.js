@@ -57,65 +57,69 @@ class Search extends React.Component {
     return (
       <div className={ styles.searchContainer } data-testid="page-search">
         <Header />
-        <form className={ styles.searchForm }>
-          <input
-            data-testid="search-artist-input"
-            className={ styles.searchInput }
-            type="text"
-            onChange={ this.handleButton }
-            onKeyDown={ this.handleEnterKey }
-            value={ input }
-            placeholder="Nome do artista"
-          />
-          <span className={ `material-symbols-outlined ${styles.icon}` }>
-            search
-          </span>
-          <button
-            data-testid="search-artist-button"
-            className={ styles.searchButton }
-            type="button"
-            disabled={ isButtonDisabled }
-            onClick={ this.getAlbumList }
-          >
-            Procurar
-          </button>
-        </form>
-        { loading && <div className={ styles.loading }><Loading /></div> }
-        { status === 'found' && (
-          <div className={ styles.searchResult }>
-            <p className={ styles.searchP }>
-              <span className={ styles.resultP }>Resultado de álbuns de: </span>
-              <span className={ styles.queryP }>{ consultado }</span>
-            </p>
-            <div />
-            {data.map(
-              ({ artistName, collectionName, collectionId, artworkUrl100 }, index) => (
-                <Link
-                  data-testid={ `link-to-album-${collectionId}` }
-                  to={ `/album/${collectionId}` }
-                  key={ index }
-                  className={ styles.album }
-                >
-                  <img src={ artworkUrl100 } alt={ collectionName } />
-                  <div className={ styles.albumInfo }>
-                    <p className={ styles.albumName }>{ collectionName }</p>
-                    <p className={ styles.artistName }>{ artistName}</p>
-                  </div>
-                  {/* <Link
+        <div className={ styles.freeSpace }>
+          <div className={ styles.bgTop } />
+          <form className={ styles.searchForm }>
+            <input
+              data-testid="search-artist-input"
+              className={ styles.searchInput }
+              type="text"
+              onChange={ this.handleButton }
+              onKeyDown={ this.handleEnterKey }
+              value={ input }
+              placeholder="Nome do artista"
+            />
+            <span className={ `material-symbols-outlined ${styles.icon}` }>
+              search
+            </span>
+            <button
+              data-testid="search-artist-button"
+              className={ styles.searchButton }
+              type="button"
+              disabled={ isButtonDisabled }
+              onClick={ this.getAlbumList }
+            >
+              Procurar
+            </button>
+          </form>
+          { loading && <div className={ styles.loading }><Loading /></div> }
+          { status === 'found' && (
+            <div className={ styles.searchResult }>
+              <p className={ styles.searchP }>
+                <span className={ styles.resultP }>Resultado de álbuns de: </span>
+                <span className={ styles.queryP }>{ consultado }</span>
+              </p>
+              <div />
+              <div className={ styles.searchCards }>
+                {data.map(
+                  ({ artistName, collectionName, collectionId, artworkUrl100 }, idx) => (
+                    <Link
+                      data-testid={ `link-to-album-${collectionId}` }
+                      to={ `/album/${collectionId}` }
+                      key={ idx }
+                      className={ styles.album }
+                    >
+                      <img src={ artworkUrl100 } alt={ collectionName } />
+                      <div className={ styles.albumInfo }>
+                        <p className={ styles.albumName }>{ collectionName }</p>
+                        <p className={ styles.artistName }>{ artistName}</p>
+                      </div>
+                      {/* <Link
                     data-testid={ `link-to-album-${collectionId}` }
                     to={ `/album/${collectionId}` }
                   >
                     Ir para álbum
                   </Link> */}
-                </Link>
-              ),
-            )}
-          </div>
-        )}
-        { status === 'not found' && (
-          <p className={ styles.error }>Nenhum álbum foi encontrado...</p>
-        )}
-
+                    </Link>
+                  ),
+                )}
+              </div>
+            </div>
+          )}
+          { status === 'not found' && (
+            <p className={ styles.error }>Nenhum álbum foi encontrado...</p>
+          )}
+        </div>
       </div>
     );
   }
