@@ -19,3 +19,73 @@
   margin: 0 0 40px;
   padding-bottom: 30px;
 }
+
+.noFav {
+  font-size: 18px;
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .wrapper {
+    background-color: #eff3f9;
+    height: 100vh;
+  }
+
+  .bgTop {
+    background-image: linear-gradient(-45deg, #00d5e2, #003be5);
+    height: 200px;
+  }
+
+  .freeSpace {
+    height: 100vh;
+    min-width: 72%;
+    position: absolute;
+    right: 0;
+    width: calc(100% - 350px);
+  }
+
+  .favContainer {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    left: 50%;
+    margin: 0 auto;
+    max-height: 85%;
+    position: absolute;
+    top: 80px;
+    transform: translateX(-50%);
+    width: 70%;
+  }
+
+  .favP {
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 25px;
+    margin-bottom: 120px;
+  }
+
+  .favCards {
+    display: flex;
+    flex-flow: row wrap;
+    overflow: auto;
+    padding: 7px;
+  }
+
+  .favCards::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+
+  .favCards::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .favCards::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+  }
+
+  .favCards::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+}

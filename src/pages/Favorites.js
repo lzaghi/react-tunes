@@ -39,29 +39,34 @@ class Favorites extends React.Component {
   render() {
     const { loading, listaFavs } = this.state;
     return (
-      <div data-testid="page-favorites">
+      <div className={ styles.wrapper } data-testid="page-favorites">
         <Header />
-        <div className={ styles.favContainer }>
-          <p className={ styles.favP }>Músicas favoritas</p>
-          {!loading && (
-            !listaFavs.length ? (
-              <p className={ styles.noFav }>
-                Você ainda não tem nenhuma música favorita...
-              </p>
-            ) : (
-              listaFavs.map((music, index) => (
-                <MusicCard
-                  key={ index }
-                  music={ music }
-                  index={ index }
-                  listaFavs={ listaFavs }
-                  handleListUpdating={ this.handleListUpdating }
-                  props={ this.props }
-                />
-              ))))}
-        </div>
-        { loading
+        <div className={ styles.freeSpace }>
+          <div className={ styles.bgTop } />
+          <div className={ styles.favContainer }>
+            <p className={ styles.favP }>Músicas favoritas</p>
+            <div className={ styles.favCards }>
+              {!loading && (
+                !listaFavs.length ? (
+                  <p className={ styles.noFav }>
+                    Você ainda não tem nenhuma música favorita...
+                  </p>
+                ) : (
+                  listaFavs.map((music, index) => (
+                    <MusicCard
+                      key={ index }
+                      music={ music }
+                      index={ index }
+                      listaFavs={ listaFavs }
+                      handleListUpdating={ this.handleListUpdating }
+                      props={ this.props }
+                    />
+                  ))))}
+            </div>
+          </div>
+          { loading
           && <div className={ styles.loading }><Loading /></div>}
+        </div>
       </div>
     );
   }
