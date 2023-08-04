@@ -89,7 +89,7 @@ class MusicCard extends React.Component {
             checked={ check }
           />
         </label> */}
-        { loading && <Loading />}
+        { loading && <div className={ styles.loading }><Loading /></div>}
       </div>
     );
   }
