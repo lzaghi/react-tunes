@@ -55,6 +55,11 @@ React, JavaScript, CSS-modules, API, LocalStorage
 A aplicação estará disponível em ```http://localhost:3000```
     
 
+## Qualidade de Código
+
+Análise SonarCloud
+![](sonarcloud.png)
+
 
 
 
