@@ -1,13 +1,34 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+# Trybe Tunes
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+Essa é uma aplicação React que permite buscar álbuns de variados artistas e bandas, ouvir prévias e favoritar músicas, a partir de um perfil personalizável.
+O projeto consome a API pública do iTunes (Apple).
+
+O foco desse projeto foi explorar os ciclos de vida de um componente React, o react-router e a gestão de estados.
+
+![Experimente!](https://react-tunes-rt.vercel.app/)
+## Funcionalidades
+
+- Fazer login
+- Pesquisar por uma banda ou artista
+- Listar os álbuns disponíveis dessa banda ou artista
+- Visualizar as músicas de um álbum selecionado
+- Reproduzir uma prévia das músicas deste álbum
+- Favoritar e desfavoritar músicas
+- Ver a lista de músicas favoritas
+- Ver o perfil da pessoa logada
+- Editar o perfil da pessoa logada
+
+
+## Demonstração
+
+![](tunes.gif)
+
+
+## Tecnologias utilizadas
+
+React, JavaScript, CSS-modules, API, LocalStorage
+
+
+
+
