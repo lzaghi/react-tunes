@@ -1,0 +1,186 @@
+.header {
+  background-image: linear-gradient(-45deg, #00d5e2, #003be5);
+  border-radius: 0 0 10px 10px;
+  height: 100px;
+  padding: 15px 30px;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+
+  /* transition: height 0.5s ease; */
+}
+
+.whiteLogo {
+  width: 120px;
+}
+
+.normalLogo {
+  display: none;
+}
+
+.top-bar {
+  align-items: end;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.open, .close {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon {
+  color: white;
+  font-size: 50px;
+}
+
+.iconSm {
+  color: white;
+  font-size: 25px;
+}
+
+.menu-expanded {
+  border-radius: 0;
+  height: 100vh;
+  transition: height 0.5s ease;
+  width: 100%;
+  z-index: 100;
+}
+
+.close, .user {
+  display: none;
+}
+
+.linkBox {
+  height: 0;
+  opacity: 0;
+}
+
+.menu-expanded .user, .menu-expanded .close {
+  display: initial;
+}
+
+.menu-expanded .linkBox {
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.menu-expanded .linkBox:hover {
+  box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+}
+
+.menu-expanded .links .link {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+.menu-expanded .links .linkBox {
+  align-items: center;
+  display: flex;
+  height: auto;
+  margin-bottom: 60px;
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.menu-expanded .open {
+  display: none;
+}
+
+.menu-expanded .burger {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 70%;
+  justify-content: space-between;
+  margin-top: 100px;
+  padding: 20px 0;
+  text-align: left;
+}
+
+.menu-expanded .user h2 {
+  color: white;
+  font-size: 30px;
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .open, .close, .menu-expanded .close {
+    display: none;
+  }
+
+  .linkBox, .menu-expanded .linkBox {
+    border-radius: 10px;
+    display: flex;
+    height: initial;
+    margin-bottom: 60px;
+    opacity: 1;
+    padding: 10px;
+  }
+
+  .header {
+    background-color: white;
+    background-image: none;
+    border-radius: 0;
+    height: 100vh;
+    max-width: 350px;
+    width: 28%;
+  }
+
+  .top-bar {
+    margin-top: 30px;
+    width: fit-content;
+  }
+
+  .whiteLogo {
+    display: none;
+  }
+
+  .normalLogo {
+    display: initial;
+    width: 200px;
+  }
+
+  .burger, .menu-expanded .burger {
+    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 300px);
+    justify-content: space-between;
+    margin: 100px auto 0;
+    padding: 0;
+    width: 200px;
+  }
+
+  .iconSm {
+    color: black;
+  }
+
+  .links .link, .menu-expanded .links .link {
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 10px;
+    text-decoration: none;
+  }
+
+  .linkBox:hover {
+    box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+  }
+
+  .user, .menu-expanded .user {
+    align-self: center;
+    display: flex;
+  }
+
+  .user h2, .menu-expanded .user h2 {
+    color: black;
+    font-size: 25px;
+  }
+}

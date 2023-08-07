@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong, removeSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from '../pages/Loading';
+import styles from './styles/MusicCard.module.css';
 
 class MusicCard extends React.Component {
   constructor() {
@@ -9,136 +10,106 @@ class MusicCard extends React.Component {
 
     this.state = {
       loading: false,
-      check: true,
+      check: false,
     };
   }
 
-  getProp = (target) => {
-    const { removeElement } = this.props;
-    removeElement(target);
-  };
+  async componentDidMount() {
+    this.handleCheckboxes();
+  }
 
-  handleRemove = (target) => {
-    const { music, removeElement } = this.props;
-    this.setState(
-      {
-        loading: true,
-      },
-      async () => {
-        await removeSong(music);
-        if (typeof removeElement !== 'undefined') this.getProp(target);
-        this.setState({ loading: false });
-      },
-    );
-  };
-
-  addToFavorites = ({ target }) => {
+  handleCheckboxes = async () => {
     const { music } = this.props;
-    const { check } = this.state;
-    console.log(target);
-    this.setState(
-      (prev) => (
-        { check: !prev.check }
-      ),
-      (check
-        && (
-          this.setState(
-            {
-              loading: true,
-            },
-            async () => {
-              await addSong(music);
-              this.setState({ loading: false });
-            },
-          )
-        )
-        // : (
-        //   this.setState(
-        //     {
-        //       loading: true,
-        //     },
-        //     async () => {
-        //       await removeSong(music);
-        //       removeElement(target);
-        //       this.setState({ loading: false });
-        //     },
-        //   )
-        // )
-      ),
-    );
-    if (!target.checked) this.handleRemove(target);
+    const { listaFavs } = this.props;
+    if (listaFavs.some((track) => track.trackId === music.trackId)) {
+      this.setState({ check: true });
+    }
   };
 
-  checksList = () => {
-    const { music, listaFavs } = this.props;
-    const bool = listaFavs.some((faixa) => faixa.trackId === music.trackId);
-    return bool;
+  handleFavorites = async (music) => {
+    const { listaFavs, handleListUpdating } = this.props;
+    const isFavorite = listaFavs.some((track) => track.trackId === music.trackId);
+    this.setState({ loading: true });
+
+    if (isFavorite) {
+      await removeSong(music);
+    } else {
+      await addSong(music);
+    }
+
+    this.setState({ loading: false, check: !isFavorite });
+    handleListUpdating(await getFavoriteSongs());
+
+    const { props: { location: { pathname } } } = this.props;
+    if (pathname === '/favorites') {
+      this.handleCheckboxes();
+    }
   };
 
   render() {
-    const { music, index } = this.props;
-    const { trackName, trackId, previewUrl } = music;
+    const { music } = this.props;
+    const { trackName, previewUrl } = music;
     const { loading, check } = this.state;
     return (
-      <div>
-        <p>{trackName}</p>
-        <audio data-testid="audio-component" src={ previewUrl } controls>
+      <div className={ styles.card }>
+        <div className={ styles.cardTop }>
+          <p className={ styles.song }>{trackName}</p>
+          <button
+            type="button"
+            onClick={ () => this.handleFavorites(music) }
+            className={ styles.favButton }
+          >
+            <span
+              className={ `material-icons-outlined ${styles.favIcon}` }
+            >
+              { check ? 'favorite' : 'favorite_outlined'}
+            </span>
+          </button>
+        </div>
+        <audio
+          className={ styles.audio }
+          data-testid="audio-component"
+          src={ previewUrl }
+          controls
+        >
           <track kind="captions" />
           O seu navegador não suporta o elemento
-          {' '}
-          {' '}
           <code>audio</code>
-          .
         </audio>
-        { this.checksList()
-
-          ? (
-            <label
-              data-testid={ `checkbox-music-${trackId}` }
-              htmlFor={ index.toString() }
-            >
-              Favorita
-              <input
-                type="checkbox"
-                name="fav"
-                id={ index.toString() }
-                onChange={ this.addToFavorites }
-                checked={ check }
-              />
-            </label>
-          )
-          : (
-            <label
-              data-testid={ `checkbox-music-${trackId}` }
-              htmlFor={ index.toString() }
-            >
-              Favorita
-              <input
-                type="checkbox"
-                name="fav"
-                id={ index.toString() }
-                onChange={ this.addToFavorites }
-                checked={ !check }
-                // onClick={ removeElement }
-              />
-            </label>)}
-        { loading && <Loading />}
+        {/* <label
+          data-testid={ `checkbox-music-${trackId}` }
+          htmlFor={ index.toString() }
+        >
+          Favorita
+          <input
+            type="checkbox"
+            name="fav"
+            id={ index.toString() }
+            onChange={ () => this.handleFavorites(music) }
+            checked={ check }
+          />
+        </label> */}
+        { loading && <div className={ styles.loading }><Loading /></div>}
       </div>
     );
   }
 }
 
 MusicCard.propTypes = {
+  handleListUpdating: PropTypes.func.isRequired, // index: PropTypes.number.isRequired,
   listaFavs: PropTypes.arrayOf(PropTypes.shape({
     some: PropTypes.func,
   })).isRequired,
-  index: PropTypes.number.isRequired,
   music: PropTypes.shape({
-    trackName: PropTypes.string,
-    trackId: PropTypes.number,
     previewUrl: PropTypes.string,
+    trackId: PropTypes.number,
+    trackName: PropTypes.string,
   }).isRequired,
-  removeElement: PropTypes.func.isRequired,
+  props: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default MusicCard;

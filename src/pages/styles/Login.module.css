@@ -1,0 +1,91 @@
+.background {
+  background-image: linear-gradient(-45deg, #00d5e2, #003be5);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.loginCard {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 0 26px 0 rgba(68, 73, 85, 0.2);
+  margin-inline: auto;
+  padding: 40px;
+  transition: ease 0.3s;
+  width: 300px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content img {
+  align-self: center;
+  margin-bottom: 60px;
+  width: 150px;
+}
+
+.nameInput, .loginButton {
+  border-radius: 100px;
+  height: 30px;
+  text-align: center;
+}
+
+.nameInput {
+  border: 1px solid #003be5;
+  margin-bottom: 10px;
+}
+
+.nameInput::placeholder {
+  color: #003be5;
+}
+
+.nameInput:focus {
+  border: 2px solid #003be5;
+  outline: none;
+}
+
+.loginButton:disabled {
+  background: #819ef5;
+  border: 1px solid #819ef5;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.loginButton:enabled {
+  background: #003be5;
+  border: 1px solid #003be5;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.loginButton:enabled:hover {
+  filter: grayscale(50%);
+}
+
+.loginLoader {
+  bottom: -360px;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .loginCard {
+    transition: ease 0.3s;
+    width: 450px;
+  }
+}

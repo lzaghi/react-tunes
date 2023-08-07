@@ -1,0 +1,247 @@
+.searchForm {
+  border-bottom: 2px solid gray;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  position: relative;
+  top: 150px;
+  width: 300px;
+}
+
+.searchInput {
+  border: 1px solid black;
+  border-radius: 100px;
+  height: 35px;
+  margin: 0 0 20px;
+  padding-left: 10px;
+}
+
+.searchInput:focus {
+  border: 2px solid black;
+  outline: none;
+  padding-left: 9px;
+}
+
+.icon {
+  color: gray;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+.searchButton {
+  border-radius: 100px;
+  font-size: 14px;
+  height: 30px;
+  margin: 0 auto 40px;
+  padding-inline: 10px;
+  text-align: center;
+}
+
+.searchButton:disabled {
+  background: #819ef5;
+  border: 1px solid #819ef5;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.searchButton:enabled {
+  background: #003be5;
+  border: 1px solid #003be5;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+.searchButton:enabled:hover {
+  filter: grayscale(50%);
+}
+
+.error, .searchResult {
+  margin: 0 auto;
+  padding: 0 10px;
+  position: relative;
+  top: 200px;
+  width: 320px;
+}
+
+.error {
+  font-size: 18px;
+}
+
+.searchResult {
+  max-height: calc(100vh - 400px);
+  overflow-y: scroll;
+}
+
+.searchResult::-webkit-scrollbar, .album::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.searchResult::-webkit-scrollbar-track, .album::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.searchResult::-webkit-scrollbar-thumb, .album::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.searchResult::-webkit-scrollbar-thumb:hover, .album::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.searchP {
+  margin-bottom: 25px;
+}
+
+.searchP .resultP {
+  font-size: 18px;
+}
+
+.searchP .queryP {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.album {
+  border-radius: 20px;
+  box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.5);
+  color: black;
+  display: flex;
+  margin: 0 0 15px;
+  overflow: auto;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.album img {
+  border-radius: 10px;
+  margin-right: 15px;
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.album:hover {
+  background-color: rgb(241, 241, 241);
+}
+
+.albumInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.albumName, .artistName {
+  font-size: 17px;
+}
+
+.artistName {
+  font-weight: 700;
+}
+
+.loading {
+  left: 50%;
+  position: absolute;
+  top: 350px;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .wrapper {
+    background-color: #eff3f9;
+    height: 100vh;
+  }
+
+  .bgTop {
+    background-image: linear-gradient(-45deg, #00d5e2, #003be5);
+    height: 200px;
+  }
+
+  .freeSpace {
+    height: 100vh;
+    min-width: 72%;
+    position: absolute;
+    right: 0;
+    width: calc(100% - 350px);
+  }
+
+  .searchForm {
+    border: none;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    top: -125px;
+    width: 450px;
+  }
+
+  .searchInput {
+    border: none;
+    margin: 0;
+    opacity: 0.6;
+    width: 320px;
+  }
+
+  .searchInput:focus {
+    border: none;
+    opacity: 0.8;
+    outline: none;
+    padding-left: 10px;
+  }
+
+  .searchInput::placeholder {
+    color: gray;
+    font-size: 16px;
+  }
+
+  .searchButton {
+    height: 35px;
+    margin: 0;
+  }
+
+  .searchButton:disabled {
+    background-color: gray;
+    border: 1px solid gray;
+  }
+
+  .icon {
+    color: gray;
+    left: 285px;
+    position: absolute;
+    right: 0;
+    top: 6px;
+    width: fit-content;
+  }
+
+  .error, .searchResult {
+    margin: 0 auto;
+    padding: 0 10px;
+    position: relative;
+    top: 0;
+    width: 85%;
+  }
+
+  .searchResult {
+    max-height: calc(100vh - 300px);
+  }
+
+  .searchCards {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .album {
+    background-color: white;
+    height: 140px;
+    margin-right: 15px;
+    overflow: auto;
+    width: 300px;
+  }
+
+}
