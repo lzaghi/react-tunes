@@ -6,7 +6,7 @@ O projeto consome a API pública do iTunes (Apple).
 
 O foco desse projeto foi explorar os ciclos de vida de um componente React, o react-router e a gestão de estados.
 
-![Experimente!](https://react-tunes-rt.vercel.app/)
+[Experimente!](https://react-tunes-rt.vercel.app/){:target="_blank"}
 ## Funcionalidades
 
 - Fazer login
