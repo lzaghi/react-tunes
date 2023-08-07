@@ -92,11 +92,11 @@ class Search extends React.Component {
               <div />
               <div className={ styles.searchCards }>
                 {data.map(
-                  ({ artistName, collectionName, collectionId, artworkUrl100 }, idx) => (
+                  ({ artistName, collectionName, collectionId, artworkUrl100 }) => (
                     <Link
                       data-testid={ `link-to-album-${collectionId}` }
                       to={ `/album/${collectionId}` }
-                      key={ idx }
+                      key={ collectionId }
                       className={ styles.album }
                     >
                       <img src={ artworkUrl100 } alt={ collectionName } />

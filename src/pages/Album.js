@@ -62,7 +62,7 @@ class Album extends React.Component {
                       musics.map((music, index) => (
                         index > 0
                         && <MusicCard
-                          key={ index }
+                          key={ music }
                           music={ music }
                           index={ index }
                           listaFavs={ listaFavs }
