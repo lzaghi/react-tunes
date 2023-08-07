@@ -29,37 +29,42 @@ class Profile extends React.Component {
   render() {
     const { loading, user } = this.state;
     return (
-      <div data-testid="page-profile">
+      <div className={ styles.wrapper } data-testid="page-profile">
         <Header />
-        { loading
-          ? <div className={ styles.loading }><Loading /></div>
-          : (
-            <div className={ styles.profileContainer }>
-              <div className={ styles.user }>
-                <img
-                  className={ styles.image }
-                  data-testid="profile-image"
-                  src={ user.image || img }
-                  alt="foto perfil"
-                />
-                <p
-                  className={ styles.name }
-                  data-testid="header-user-name"
-                >
-                  { user.name }
-                </p>
+        <div className={ styles.freeSpace }>
+          <div className={ styles.bgTop } />
+          { loading
+            ? <div className={ styles.loading }><Loading /></div>
+            : (
+              <div>
+                <div className={ styles.user }>
+                  <img
+                    className={ styles.image }
+                    data-testid="profile-image"
+                    src={ user.image || img }
+                    alt="foto perfil"
+                  />
+                  <p
+                    className={ styles.name }
+                    data-testid="header-user-name"
+                  >
+                    { user.name }
+                  </p>
+                </div>
+                <div className={ styles.profileContainer }>
+                  <p className={ styles.emailContainer }>
+                    <span className={ styles.email }>Email: </span>
+                    {user.email || '-'}
+                  </p>
+                  <p className={ styles.descContainer }>
+                    <span className={ styles.desc }>Descrição: </span>
+                    {user.description || '-'}
+                  </p>
+                  <Link className={ styles.link } to="/profile/edit">editar perfil</Link>
+                </div>
               </div>
-              <p className={ styles.emailContainer }>
-                <span className={ styles.email }>Email: </span>
-                {user.email || '-'}
-              </p>
-              <p className={ styles.descContainer }>
-                <span className={ styles.desc }>Descrição: </span>
-                {user.description || '-'}
-              </p>
-              <Link className={ styles.link } to="/profile/edit">editar perfil</Link>
-            </div>
-          )}
+            )}
+        </div>
       </div>
     );
   }

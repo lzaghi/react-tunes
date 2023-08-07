@@ -62,9 +62,14 @@
   background: #003be5;
   border: 1px solid #003be5;
   color: white;
+  cursor: pointer;
   font-weight: 700;
   text-transform: uppercase;
   transition: 0.3s;
+}
+
+.loginButton:enabled:hover {
+  filter: grayscale(50%);
 }
 
 .loginLoader {

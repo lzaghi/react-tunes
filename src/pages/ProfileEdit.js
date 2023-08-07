@@ -47,10 +47,10 @@ class ProfileEdit extends React.Component {
   };
 
   validaBotao = () => {
-    const { name, email, image, description } = this.state;
+    const { name, email, description } = this.state;
     const filled = name.length > 0
       && this.validaEmail(email)
-      && image
+      // && image
       && description.length > 0;
     return !filled;
   };
@@ -84,71 +84,75 @@ class ProfileEdit extends React.Component {
   render() {
     const { loading, name, email, description } = this.state;
     return (
-      <div data-testid="page-profile-edit">
+      <div className={ styles.wrapper } data-testid="page-profile-edit">
         <Header />
-        { loading
-          ? <div className={ styles.loading }><Loading /></div>
-          : (
-            <form className={ styles.editContainer }>
-              <p className={ styles.editP }>Edite seu perfil</p>
-              <label className={ styles.label } htmlFor="name">
-                Nome
-                <input
-                  className={ styles.editInput }
-                  data-testid="edit-input-name"
-                  type="text"
-                  name="name"
-                  id="name"
-                  defaultValue={ name }
-                  onChange={ this.onInputChange }
-                  onKeyDown={ this.handleEnterKey }
-                />
-              </label>
-              <label className={ styles.label } htmlFor="email">
-                Email
-                <input
-                  className={ styles.editInput }
-                  data-testid="edit-input-email"
-                  type="text"
-                  name="email"
-                  defaultValue={ email }
-                  onChange={ this.onInputChange }
-                  onKeyDown={ this.handleEnterKey }
-                />
-              </label>
-              <label className={ styles.label } htmlFor="description">
-                Descrição
-                <textarea
-                  className={ styles.editTextarea }
-                  data-testid="edit-input-description"
-                  type="text"
-                  name="description"
-                  defaultValue={ description }
-                  onChange={ this.onInputChange }
-                  onKeyDown={ this.handleEnterKey }
-                />
-              </label>
-              <label className={ styles.label } htmlFor="image">
-                Imagem
-                <input
-                  className={ styles.imageInput }
-                  data-testid="edit-input-image"
-                  type="file"
-                  name="image"
-                  onChange={ this.onImageChange }
-                />
-              </label>
-              <button
-                className={ styles.editButton }
-                data-testid="edit-button-save"
-                type="button"
-                disabled={ this.validaBotao() }
-                onClick={ this.onSave }
-              >
-                Salvar
-              </button>
-            </form>
-          )}
+        <div className={ styles.freeSpace }>
+          <div className={ styles.bgTop } />
+          { loading
+            ? <div className={ styles.loading }><Loading /></div>
+            : (
+              <form className={ styles.editContainer }>
+                <p className={ styles.editP }>Edite seu perfil</p>
+                <label className={ styles.label } htmlFor="name">
+                  Nome
+                  <input
+                    className={ styles.editInput }
+                    data-testid="edit-input-name"
+                    type="text"
+                    name="name"
+                    id="name"
+                    defaultValue={ name }
+                    onChange={ this.onInputChange }
+                    onKeyDown={ this.handleEnterKey }
+                  />
+                </label>
+                <label className={ styles.label } htmlFor="email">
+                  Email
+                  <input
+                    className={ styles.editInput }
+                    data-testid="edit-input-email"
+                    type="text"
+                    name="email"
+                    defaultValue={ email }
+                    onChange={ this.onInputChange }
+                    onKeyDown={ this.handleEnterKey }
+                  />
+                </label>
+                <label className={ styles.label } htmlFor="description">
+                  Descrição
+                  <textarea
+                    className={ styles.editTextarea }
+                    data-testid="edit-input-description"
+                    type="text"
+                    name="description"
+                    defaultValue={ description }
+                    onChange={ this.onInputChange }
+                    onKeyDown={ this.handleEnterKey }
+                    maxLength="500"
+                  />
+                </label>
+                <label className={ styles.label } htmlFor="image">
+                  Imagem
+                  <input
+                    className={ styles.imageInput }
+                    data-testid="edit-input-image"
+                    type="file"
+                    name="image"
+                    onChange={ this.onImageChange }
+                  />
+                </label>
+                <button
+                  className={ styles.editButton }
+                  data-testid="edit-button-save"
+                  type="button"
+                  disabled={ this.validaBotao() }
+                  onClick={ this.onSave }
+                >
+                  Salvar
+                </button>
+              </form>
+            )}
+        </div>
       </div>
     );
   }

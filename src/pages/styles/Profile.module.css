@@ -11,7 +11,11 @@
   align-items: center;
   border-bottom: 1px solid gray;
   display: flex;
+  margin: 0 auto;
   padding-bottom: 20px;
+  position: relative;
+  top: 150px;
+  width: 300px;
 }
 
 .image {
@@ -62,4 +66,54 @@
 
 .link:hover {
   filter: grayscale(25%);
+}
+
+@media screen and ( min-width : 1024px ) {
+
+  .wrapper {
+    background-color: #eff3f9;
+    height: 100vh;
+  }
+
+  .bgTop {
+    background-image: linear-gradient(-45deg, #00d5e2, #003be5);
+    height: 200px;
+  }
+
+  .freeSpace {
+    height: 100vh;
+    min-width: 72%;
+    position: absolute;
+    right: 0;
+    width: calc(100% - 350px);
+  }
+
+  .user {
+    border: none;
+    left: 37.5%;
+    position: fixed;
+    top: 100px;
+  }
+
+  .name {
+    color: white;
+    font-size: 30px;
+    padding-bottom: 45px;
+  }
+
+  .image {
+    background-color: #eff3f9;
+    border-radius: 100%;
+    box-shadow: 0 0 15px -1px rgba(0, 0, 0, 0.7);
+    height: 200px;
+    width: 200px;
+  }
+
+  .profileContainer {
+    left: calc(37.5% + 230px);
+    min-width: 300px;
+    position: fixed;
+    top: 250px;
+    width: 30vw;
+  }
 }

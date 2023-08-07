@@ -57,6 +57,10 @@
   transition: 0.3s;
 }
 
+.searchButton:enabled:hover {
+  filter: grayscale(50%);
+}
+
 .error, .searchResult {
   margin: 0 auto;
   padding: 0 10px;
