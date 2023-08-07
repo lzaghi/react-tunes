@@ -54,7 +54,7 @@ class Favorites extends React.Component {
                 ) : (
                   listaFavs.map((music, index) => (
                     <MusicCard
-                      key={ music }
+                      key={ music.trackId }
                       music={ music }
                       index={ index }
                       listaFavs={ listaFavs }
